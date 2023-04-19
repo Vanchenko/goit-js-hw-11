@@ -38,5 +38,13 @@ export function renderGallery(pictures) {
     refs.galleryEl.style.justifyContent = "center";
     refs.galleryEl.insertAdjacentHTML("beforeend", markUp);
     gallery.refresh();
+
    // observer.observe(refs.galleryEl.lastChild);
+}
+
+export function renderInfoline(qqpict, pictTotal) {
+    refs.foundPict.style.display = "flex";
+    refs.loadPict.style.display = "flex";
+    refs.foundPict.textContent = `Found pictures :${qqpict}`;
+    refs.loadPict.textContent = `Load pictures :${pictTotal}`;
 }

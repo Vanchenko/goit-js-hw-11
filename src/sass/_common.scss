@@ -49,3 +49,13 @@
   flex-wrap: wrap;
   color: darkslategrey;
 }
+.info-line {
+    display: flex;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    //margin-right: auto;
+    margin-left: 25px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+}
