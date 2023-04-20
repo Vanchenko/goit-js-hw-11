@@ -55,6 +55,12 @@ const observer = new IntersectionObserver(callback, optionsScroll);
 
 refs.srhFormEl.addEventListener("submit", (event) => {  
     event.preventDefault();
+    options.params.q = (refs.srhFormEl.elements[0].value).trim();
+    if (options.params.q === "") {
+        console.log("return");
+        event.currentTarget.reset();
+        return
+    };
     page = 1;
     options.params.page = page;
     pictTotal = 0;
@@ -63,7 +69,8 @@ refs.srhFormEl.addEventListener("submit", (event) => {
     refs.galleryEl.innerHTML = "";
     refs.foundPict.style.display = "none";
     refs.loadPict.style.display = "none";
-    options.params.q = refs.srhFormEl.elements[0].value;
+  
+    console.log("Search:", options.params.q);
     loadPictures()
         .then((pictures) => {
             if (pictures.data.hits.length > 0) {
@@ -72,11 +79,14 @@ refs.srhFormEl.addEventListener("submit", (event) => {
                 pictTotal = pictTotal + pictures.data.hits.length;
                 renderInfoline(pictures.data.totalHits, pictTotal);
                 observer.observe(refs.galleryEl.lastChild);
+
             }
             else { Notiflix.Notify.warning(`Sorry, there are no images matching your search query: "${options.params.q}".`) };
         }).catch((error) => {
             console.log(error);
-        }).finally(() => { setTimeout(() => { refs.srhFormEl.children[1].removeAttribute('disabled'); }, 3000); });
+        }).finally(() => {
+            setTimeout(() => { refs.srhFormEl.children[1].removeAttribute('disabled'); }, 3000);
+        });
 });
 
 refs.lmBtnEl.addEventListener("click", () => {
